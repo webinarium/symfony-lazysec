@@ -1,0 +1,18 @@
+{
+    "name": "webinarium/pignus-bundle",
+    "description": "Symfony bundle with a bunch of security related features",
+    "type": "symfony-bundle",
+    "keywords": ["symfony", "security"],
+    "homepage": "https://github.com/webinarium/PignusBundle",
+    "license": "MIT",
+    "require": {
+        "symfony/http-kernel": "^2.3|^3.0"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Pignus\\": ""
+        }
+    }
+}
