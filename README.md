@@ -30,3 +30,9 @@ public function registerBundles()
     ];
 }
 ```
+
+## Development
+
+```console
+./vendor/bin/php-cs-fixer fix
+```
