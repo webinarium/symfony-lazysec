@@ -35,4 +35,5 @@ public function registerBundles()
 
 ```console
 ./vendor/bin/php-cs-fixer fix
+./vendor/bin/phpunit --coverage-html=vendor/coverage
 ```
