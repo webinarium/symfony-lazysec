@@ -1,3 +1,4 @@
+[![PHP](https://img.shields.io/badge/PHP-7.0%2B-blue.svg)](https://secure.php.net/migration70)
 [![Latest Stable Version](https://poser.pugx.org/webinarium/pignus-bundle/v/stable)](https://packagist.org/packages/webinarium/pignus-bundle)
 
 # Pignus for Symfony
