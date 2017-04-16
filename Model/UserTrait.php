@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * User trait.
  *
- * @ORM\MappedSuperclass
+ * @ORM\MappedSuperclass(repositoryClass="Pignus\Model\UserRepositoryInterface")
  */
 trait UserTrait
 {
