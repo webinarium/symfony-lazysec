@@ -1,0 +1,11 @@
+# Catalan
+'Bad credentials.': 'Usuari o contrasenya invàlid.'
+'User account has expired.': 'El compte d''usuari ha vençut.'
+'User account is disabled.': 'El compte està inhabilitat.'
+'User account is locked.': 'El compte està bloquejat.'
+'User credentials have expired.': 'La contrasenya ha caducat.'
+pignus.button_login: 'Entra'
+pignus.button_logout: 'Surt'
+pignus.label_password: 'Contrasenya'
+pignus.label_remember_me: 'Recorda''t de mi'
+pignus.label_username: 'Nom d''usuari'

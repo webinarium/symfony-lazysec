@@ -1,0 +1,11 @@
+# Slovenian
+'Bad credentials.': 'Napačno uporabniško ime ali geslo.'
+'User account has expired.': 'Račun je pretekel.'
+'User account is disabled.': 'Račun je onemogočen.'
+'User account is locked.': 'Račun je zaklenjen.'
+'User credentials have expired.': 'Geslo je preteklo.'
+pignus.button_login: 'Prijava'
+pignus.button_logout: 'Odjava'
+pignus.label_password: 'Geslo'
+pignus.label_remember_me: 'Zapomni si me'
+pignus.label_username: 'Uporabniško ime'

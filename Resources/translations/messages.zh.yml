@@ -1,0 +1,11 @@
+# Chinese
+'Bad credentials.': '无效的用户名或密码'
+'User account has expired.': '帐户已过期。'
+'User account is disabled.': '账户被禁用。'
+'User account is locked.': '帐号被锁。'
+'User credentials have expired.': '密码已过期。'
+pignus.button_login: '登录'
+pignus.button_logout: '登出'
+pignus.label_password: '密码'
+pignus.label_remember_me: '记住我'
+pignus.label_username: '用户名'

@@ -1,0 +1,11 @@
+# Greek
+'Bad credentials.': 'Άκυρο όνομα χρήστη ή κωδικού πρόσβασης.'
+'User account has expired.': 'Ο λογαριασμός έχει λήξει.'
+'User account is disabled.': 'Ο λογαριασμός είναι απενεργοποιημένος.'
+'User account is locked.': 'Ο λογαριασμός είναι κλειδωμένος.'
+'User credentials have expired.': 'Ο κωδικός πρόσβασης έχει λήξει.'
+pignus.button_login: 'Σύνδεση'
+pignus.button_logout: 'Αποσύνδεση'
+pignus.label_password: 'Κωδικός πρόσβασης'
+pignus.label_remember_me: 'Απομνημόνευση'
+pignus.label_username: 'Όνομα χρήστη'

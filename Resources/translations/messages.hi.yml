@@ -1,0 +1,11 @@
+# Hindi
+'Bad credentials.': 'अमान्य उपयोगकर्ता या पासवर्ड'
+'User account has expired.': 'उपयोक्ता खाता की अवधि समाप्त हो चुकी है.'
+'User account is disabled.': 'खाता अक्षम.'
+'User account is locked.': 'लेखा तालकित है.'
+'User credentials have expired.': 'कूटशब्द का समय समाप्त हो गया है.'
+pignus.button_login: 'लॉग इन'
+pignus.button_logout: 'लॉग आउट'
+pignus.label_password: 'शब्दकूट'
+pignus.label_remember_me: 'मुझे याद रखना'
+pignus.label_username: 'उपयोक्तानाम'

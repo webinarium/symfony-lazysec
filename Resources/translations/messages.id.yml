@@ -1,0 +1,11 @@
+# Indonesian
+'Bad credentials.': 'Pengguna atau kata sandi salah.'
+'User account has expired.': 'Akun pengguna sudah berakhir.'
+'User account is disabled.': 'Akun dimatikan.'
+'User account is locked.': 'Akun dikunci.'
+'User credentials have expired.': 'Kata sandi telah habis masa berlakunya.'
+pignus.button_login: 'Log masuk'
+pignus.button_logout: 'Log keluar'
+pignus.label_password: 'Kata sandi'
+pignus.label_remember_me: 'Ingat saya'
+pignus.label_username: 'Nama pengguna'

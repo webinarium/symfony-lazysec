@@ -1,0 +1,11 @@
+# Basque
+'Bad credentials.': 'Erabiltzaile edo pasahitz ezegokia.'
+'User account has expired.': 'Kontua iraungitu da.'
+'User account is disabled.': 'Kontu hau desgaitu egin da.'
+'User account is locked.': 'Kontua blokeatuta dago.'
+'User credentials have expired.': 'Pasahitza iraungitu da.'
+pignus.button_login: 'Hasi saioa'
+pignus.button_logout: 'Amaitu saioa'
+pignus.label_password: 'Pasahitza'
+pignus.label_remember_me: 'Gogora nazazu'
+pignus.label_username: 'Erabiltzaile-izena'

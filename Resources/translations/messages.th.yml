@@ -1,0 +1,11 @@
+# Thai
+'Bad credentials.': 'ชื้ผู้ใช้หรือรหัสผ่านไม่ถูกต้อง'
+'User account has expired.': 'บัญชีของคุณหมดอายุแล้ว'
+'User account is disabled.': 'บัญชีถูกระงับ'
+'User account is locked.': 'บัญชีถูกล็อค'
+'User credentials have expired.': 'รหัสผ่านของคุณหมดอายุแล้ว'
+pignus.button_login: 'เข้าสู่ระบบ'
+pignus.button_logout: 'ออกจากระบบ'
+pignus.label_password: 'รหัสผ่าน'
+pignus.label_remember_me: 'บันทึกการใช้งานของฉัน'
+pignus.label_username: 'ชื่อผู้ใช้'

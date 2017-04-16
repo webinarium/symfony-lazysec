@@ -1,0 +1,11 @@
+# Latvian
+'Bad credentials.': 'Nepareizs lietotāja vārds vai parole.'
+'User account has expired.': 'Jūsu konta derīgums ir beidzies.'
+'User account is disabled.': 'Konts ir deaktivizēts.'
+'User account is locked.': 'Konts ir bloķēts.'
+'User credentials have expired.': 'Jūsu parole ir izbeigusies.'
+pignus.button_login: 'Pieslēgties'
+pignus.button_logout: 'Atslēgties'
+pignus.label_password: 'Parole'
+pignus.label_remember_me: 'Atcerēties mani'
+pignus.label_username: 'Lietotājvārds'

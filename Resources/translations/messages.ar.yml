@@ -1,0 +1,11 @@
+# Arabic
+'Bad credentials.': 'اسم المستخدم او كلمة المرور غير صحيحة'
+'User account has expired.': 'انتهت صلاحية الحساب.'
+'User account is disabled.': 'هذا الحساب معطّل.'
+'User account is locked.': 'تم تأمين الحساب.'
+'User credentials have expired.': 'كلمة السر انتهت.'
+pignus.button_login: 'تسجيل الدخول'
+pignus.button_logout: 'سجّل الخروج'
+pignus.label_password: 'كلمة السر'
+pignus.label_remember_me: 'تذكرني'
+pignus.label_username: 'اسم المستخدم'

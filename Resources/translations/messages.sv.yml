@@ -1,0 +1,11 @@
+# Swedish
+'Bad credentials.': 'Fel användarnamn eller lösenord.'
+'User account has expired.': 'Kontot har gått ut.'
+'User account is disabled.': 'Kontot inaktiverat.'
+'User account is locked.': 'Kontot är låst.'
+'User credentials have expired.': 'Lösenordet har gått ut.'
+pignus.button_login: 'Logga in'
+pignus.button_logout: 'Logga ut'
+pignus.label_password: 'Lösenord'
+pignus.label_remember_me: 'Kom ihåg mig'
+pignus.label_username: 'Användarnamn'

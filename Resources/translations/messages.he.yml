@@ -1,0 +1,11 @@
+# Hebrew
+'Bad credentials.': 'שם משתמש או סיסמה שגויים'
+'User account has expired.': 'חשבון משתמש פג.'
+'User account is disabled.': 'חשבון מנוטרל.'
+'User account is locked.': 'החשבון נעול.'
+'User credentials have expired.': 'פג תוקף סיסמתך.'
+pignus.button_login: 'כניסה'
+pignus.button_logout: 'התנתק'
+pignus.label_password: 'סיסמה'
+pignus.label_remember_me: 'זכור אותי'
+pignus.label_username: 'שם משתמש'

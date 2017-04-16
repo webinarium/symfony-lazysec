@@ -1,0 +1,11 @@
+# Belarusian
+'Bad credentials.': 'Няправільны карыстальнік або пароль.'
+'User account has expired.': 'Уліковы запіс састарэў.'
+'User account is disabled.': 'Уліковы запіс адключаная.'
+'User account is locked.': 'Уліковы запіс заблакаваная.'
+'User credentials have expired.': 'Ваш пароль састарэў.'
+pignus.button_login: 'Увайсці'
+pignus.button_logout: 'Выйсці'
+pignus.label_password: 'Пароль'
+pignus.label_remember_me: 'Запомніць мяне'
+pignus.label_username: 'Імя карыстальніка'

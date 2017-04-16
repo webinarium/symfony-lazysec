@@ -1,0 +1,11 @@
+# Bosnian
+'Bad credentials.': 'Pogrešan korisnik ili lozinka.'
+'User account has expired.': 'Nalog je istekao.'
+'User account is disabled.': 'Nalog je onemogućen.'
+'User account is locked.': 'Nalog je zaključan.'
+'User credentials have expired.': 'Vaša lozinka je istekla.'
+pignus.button_login: 'Prijava'
+pignus.button_logout: 'Odjava'
+pignus.label_password: 'Lozinka'
+pignus.label_remember_me: 'Zapamti me'
+pignus.label_username: 'Korisničko ime'

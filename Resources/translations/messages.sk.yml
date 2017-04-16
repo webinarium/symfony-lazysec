@@ -1,0 +1,11 @@
+# Slovak
+'Bad credentials.': 'Nesprávne meno alebo heslo.'
+'User account has expired.': 'Konto je vypršalo.'
+'User account is disabled.': 'Konto je zakázaný.'
+'User account is locked.': 'Konto je zamknuté.'
+'User credentials have expired.': 'Heslo je vypršalo.'
+pignus.button_login: 'Prihlásiť sa'
+pignus.button_logout: 'Odhlásiť sa'
+pignus.label_password: 'Heslo'
+pignus.label_remember_me: 'Zapamätať ma'
+pignus.label_username: 'Meno používateľa'

@@ -1,0 +1,11 @@
+# Hungarian
+'Bad credentials.': 'Hibás felhasználói név, vagy jelszó.'
+'User account has expired.': 'A felhasználói fiókja lejárt.'
+'User account is disabled.': 'Fiók letiltva.'
+'User account is locked.': 'Fiók zárolva.'
+'User credentials have expired.': 'A jelszó lejárt.'
+pignus.button_login: 'Bejelentkezés'
+pignus.button_logout: 'Kijelentkezés'
+pignus.label_password: 'Jelszó'
+pignus.label_remember_me: 'Emlékezz rám'
+pignus.label_username: 'Felhasználónév'

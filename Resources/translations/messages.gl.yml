@@ -1,0 +1,11 @@
+# Galician
+'Bad credentials.': 'O usuario ou contrasinal non é correcto.'
+'User account has expired.': 'A conta caducou.'
+'User account is disabled.': 'A conta está desactivada.'
+'User account is locked.': 'A conta está bloqueada.'
+'User credentials have expired.': 'O seu contrasinal caducou.'
+pignus.button_login: 'Iniciar a sesión'
+pignus.button_logout: 'Saír da sesión'
+pignus.label_password: 'Contrasinal'
+pignus.label_remember_me: 'Lémbrame'
+pignus.label_username: 'Nome de usuario'

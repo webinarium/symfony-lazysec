@@ -1,0 +1,11 @@
+# Dutch
+'Bad credentials.': 'Incorrecte gebruikersnaam of wachtwoord.'
+'User account has expired.': 'Account is verlopen.'
+'User account is disabled.': 'Account is uitgeschakeld.'
+'User account is locked.': 'Account is vergrendeld.'
+'User credentials have expired.': 'Wachtwoord is verlopen.'
+pignus.button_login: 'Inloggen'
+pignus.button_logout: 'Uitloggen'
+pignus.label_password: 'Wachtwoord'
+pignus.label_remember_me: 'Deze gegevens onthouden'
+pignus.label_username: 'Gebruikersnaam'
