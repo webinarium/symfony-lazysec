@@ -1,0 +1,11 @@
+services:
+
+    pignus.event_listener.unauthorized_request:
+        class: Pignus\EventListener\UnauthorizedRequest
+        tags: [{ name: kernel.event_listener, event: kernel.response, method: onResponse }]
+        arguments:
+            - '@router'
+            - '@translator'
+            - '@security.authentication_utils'
+            - '@security.firewall.map'
+            - '%pignus.login%'
