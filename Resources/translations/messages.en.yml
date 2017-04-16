@@ -1,0 +1,11 @@
+# English
+'Bad credentials.': 'Unknown user or wrong password.'
+'User account has expired.': 'Account has expired.'
+'User account is disabled.': 'Account is disabled.'
+'User account is locked.': 'Account is locked.'
+'User credentials have expired.': 'Password has expired.'
+pignus.button_login: 'Log in'
+pignus.button_logout: 'Log out'
+pignus.label_password: 'Password'
+pignus.label_remember_me: 'Remember me'
+pignus.label_username: 'Username'

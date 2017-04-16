@@ -1,0 +1,12 @@
+pignus.login:
+    path:     /login
+    methods:  [GET]
+    defaults: { _controller: PignusBundle:Login:index }
+
+pignus.login_check:
+    path:    /login_check
+    methods: [POST]
+
+pignus.logout:
+    path:    /logout
+    methods: [GET]
