@@ -7,7 +7,15 @@
 
 # Pignus for Symfony
 
-The bundle provides few classes and features related to the Security component.
+The bundle provides few classes and features related to the Security component:
+
+- [User entity trait](//github.com/webinarium/PignusBundle/wiki/User-entity)
+- [User provider](//github.com/webinarium/PignusBundle/wiki/User-provider)
+- [Unauthorized AJAX requests handler](//github.com/webinarium/PignusBundle/wiki/Unauthorized-AJAX-requests-handler)
+- [Login page](//github.com/webinarium/PignusBundle/wiki/Login-page)
+- [Translations](//github.com/webinarium/PignusBundle/wiki/Translations)
+
+All the features are decoupled from each other and can be used independently, so you are free to use only those you need.
 
 ## Installation
 
