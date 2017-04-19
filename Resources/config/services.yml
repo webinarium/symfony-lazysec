@@ -1,5 +1,15 @@
 services:
 
+    pignus.authenticator.abstract:
+        abstract: true
+        class: Pignus\Authenticator\AbstractAuthenticator
+        public: false
+        arguments:
+            - '@router'
+            - '@session'
+            - '@security.encoder_factory'
+            - '@security.firewall.map'
+
     pignus.provider.abstract:
         abstract: true
         class: Pignus\Provider\GenericUserProvider
