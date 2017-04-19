@@ -29,6 +29,7 @@ class PignusExtension extends ConfigurableExtension
     protected function loadInternal(array $mergedConfig, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('services.yml');
 
         if ($mergedConfig['unauthorized_request']) {
             $loader->load('unauthorized_request.yml');

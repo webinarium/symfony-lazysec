@@ -12,15 +12,16 @@
 namespace Pignus\Tests\Provider;
 
 use Pignus\Model\UserRepositoryInterface;
+use Pignus\Provider\GenericUserProvider;
 use Pignus\Tests\Model\DummyUser;
 use Symfony\Component\Security\Core\User\User;
 
-class AbstractUserProviderTest extends \PHPUnit_Framework_TestCase
+class GenericUserProviderTest extends \PHPUnit_Framework_TestCase
 {
     /** @var DummyUser */
     protected $user;
 
-    /** @var DummyUserProvider */
+    /** @var GenericUserProvider */
     protected $provider;
 
     protected function setUp()
@@ -40,8 +41,12 @@ class AbstractUserProviderTest extends \PHPUnit_Framework_TestCase
                 ['admin', $this->user],
             ]);
 
+        $repository
+            ->method('getClassName')
+            ->willReturn(DummyUser::class);
+
         /** @var UserRepositoryInterface $repository */
-        $this->provider = new DummyUserProvider($repository);
+        $this->provider = new GenericUserProvider($repository);
     }
 
     public function testLoadUserByUsername()

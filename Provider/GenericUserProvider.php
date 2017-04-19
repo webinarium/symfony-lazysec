@@ -18,9 +18,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 /**
- * Abstract provider to load users from the database.
+ * Generic provider to load users from the database.
  */
-abstract class AbstractUserProvider implements UserProviderInterface
+class GenericUserProvider implements UserProviderInterface
 {
     protected $repository;
 
@@ -64,5 +64,13 @@ abstract class AbstractUserProvider implements UserProviderInterface
         }
 
         return $user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function supportsClass($class)
+    {
+        return $class === $this->repository->getClassName();
     }
 }

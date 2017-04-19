@@ -1,0 +1,6 @@
+services:
+
+    pignus.provider.abstract:
+        abstract: true
+        class: Pignus\Provider\GenericUserProvider
+        public: false
