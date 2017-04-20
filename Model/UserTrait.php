@@ -88,6 +88,13 @@ trait UserTrait
      */
     public function isCredentialsNonExpired()
     {
+        if (in_array(ExpirePasswordTrait::class, class_uses($this), true)) {
+            /** @var ExpirePasswordTrait $this */
+            return $this->canPasswordBeExpired()
+                ? $this->passwordExpiresAt === null || $this->passwordExpiresAt > time()
+                : true;
+        }
+
         return true;
     }
 
