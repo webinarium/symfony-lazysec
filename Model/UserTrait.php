@@ -71,6 +71,13 @@ trait UserTrait
      */
     public function isAccountNonExpired()
     {
+        if (in_array(ExpireAccountTrait::class, class_uses($this), true)) {
+            /** @var ExpireAccountTrait $this */
+            return $this->canAccountBeExpired()
+                ? $this->accountExpiresAt === null || $this->accountExpiresAt > time()
+                : true;
+        }
+
         return true;
     }
 
