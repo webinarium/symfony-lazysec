@@ -56,6 +56,11 @@ trait UserTrait
      */
     public function isEnabled()
     {
+        if (in_array(DisableAccountTrait::class, class_uses($this), true)) {
+            /** @var DisableAccountTrait $this */
+            return $this->canAccountBeDisabled() ? $this->isEnabled : true;
+        }
+
         return true;
     }
 
