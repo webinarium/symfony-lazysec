@@ -19,6 +19,13 @@ services:
             - '@session'
             - '@security.firewall.map'
 
+    pignus.event_listener.user_lockout:
+        abstract: true
+        class: Pignus\EventListener\UserLockout
+        arguments:
+            - '@logger'
+            - '@doctrine.orm.default_entity_manager'
+
     pignus.provider.abstract:
         abstract: true
         class: Pignus\Provider\GenericUserProvider

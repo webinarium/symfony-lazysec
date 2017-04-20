@@ -105,6 +105,13 @@ trait UserTrait
      */
     public function isAccountNonLocked()
     {
+        if (in_array(LockAccountTrait::class, class_uses($this), true)) {
+            /** @var LockAccountTrait $this */
+            return $this->canAccountBeLocked()
+                ? $this->lockedUntil === null || $this->lockedUntil !== 0 && $this->lockedUntil <= time()
+                : true;
+        }
+
         return true;
     }
 }

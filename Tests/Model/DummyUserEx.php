@@ -14,10 +14,12 @@ namespace Pignus\Tests\Model;
 use Pignus\Model\DisableAccountTrait;
 use Pignus\Model\ExpireAccountTrait;
 use Pignus\Model\ExpirePasswordTrait;
+use Pignus\Model\LockAccountTrait;
 
 class DummyUserEx extends DummyUser
 {
     use DisableAccountTrait;
     use ExpireAccountTrait;
     use ExpirePasswordTrait;
+    use LockAccountTrait;
 }
