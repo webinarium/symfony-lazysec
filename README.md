@@ -12,6 +12,8 @@ The bundle provides few classes and features related to the Security component:
 - [User entity trait](//github.com/webinarium/PignusBundle/wiki/User-entity)
 - [User provider](//github.com/webinarium/PignusBundle/wiki/User-provider)
 - [Unauthorized AJAX requests handler](//github.com/webinarium/PignusBundle/wiki/Unauthorized-AJAX-requests-handler)
+- [Generic authenticator](//github.com/webinarium/PignusBundle/wiki/Abstract-authenticator)
+- [OAuth2 authenticator](//github.com/webinarium/PignusBundle/wiki/OAuth2-authenticator)
 - [Login page](//github.com/webinarium/PignusBundle/wiki/Login-page)
 - [Translations](//github.com/webinarium/PignusBundle/wiki/Translations)
 
