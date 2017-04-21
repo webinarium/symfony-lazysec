@@ -36,9 +36,6 @@ class UnauthorizedRequestTest extends \PHPUnit_Framework_TestCase
     /** @var FirewallMap */
     protected $firewallMap;
 
-    /** @var UnauthorizedRequest */
-    protected $listener;
-
     protected function setUp()
     {
         parent::setUp();
@@ -74,11 +71,11 @@ class UnauthorizedRequestTest extends \PHPUnit_Framework_TestCase
 
         $event = new FilterResponseEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST, $response);
 
-        $this->listener = new UnauthorizedRequest($this->router, $this->translator, $this->authenticationUtils, $this->firewallMap, [
+        $listener = new UnauthorizedRequest($this->router, $this->translator, $this->authenticationUtils, $this->firewallMap, [
             'main' => 'pignus.login',
         ]);
 
-        $this->listener->onResponse($event);
+        $listener->onResponse($event);
 
         self::assertEquals(Response::HTTP_OK, $event->getResponse()->getStatusCode());
         self::assertEquals('Test', $event->getResponse()->getContent());
@@ -96,11 +93,11 @@ class UnauthorizedRequestTest extends \PHPUnit_Framework_TestCase
 
         $event = new FilterResponseEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST, $response);
 
-        $this->listener = new UnauthorizedRequest($this->router, $this->translator, $this->authenticationUtils, $this->firewallMap, [
+        $listener = new UnauthorizedRequest($this->router, $this->translator, $this->authenticationUtils, $this->firewallMap, [
             'main' => 'pignus.login',
         ]);
 
-        $this->listener->onResponse($event);
+        $listener->onResponse($event);
 
         self::assertEquals(Response::HTTP_OK, $event->getResponse()->getStatusCode());
         self::assertEquals('Test', $event->getResponse()->getContent());
@@ -120,11 +117,11 @@ class UnauthorizedRequestTest extends \PHPUnit_Framework_TestCase
 
         $event = new FilterResponseEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST, $response);
 
-        $this->listener = new UnauthorizedRequest($this->router, $this->translator, $this->authenticationUtils, $this->firewallMap, [
+        $listener = new UnauthorizedRequest($this->router, $this->translator, $this->authenticationUtils, $this->firewallMap, [
             'main' => 'pignus.login',
         ]);
 
-        $this->listener->onResponse($event);
+        $listener->onResponse($event);
 
         self::assertEquals(Response::HTTP_UNAUTHORIZED, $event->getResponse()->getStatusCode());
         self::assertEquals('Error: authentication required.', $event->getResponse()->getContent());
@@ -144,11 +141,11 @@ class UnauthorizedRequestTest extends \PHPUnit_Framework_TestCase
 
         $event = new FilterResponseEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST, $response);
 
-        $this->listener = new UnauthorizedRequest($this->router, $this->translator, $this->authenticationUtils, $this->firewallMap, [
+        $listener = new UnauthorizedRequest($this->router, $this->translator, $this->authenticationUtils, $this->firewallMap, [
             'admin' => 'pignus.login',
         ]);
 
-        $this->listener->onResponse($event);
+        $listener->onResponse($event);
 
         self::assertEquals(Response::HTTP_FOUND, $event->getResponse()->getStatusCode());
         self::assertEquals('Test', $event->getResponse()->getContent());

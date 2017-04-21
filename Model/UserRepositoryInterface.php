@@ -12,6 +12,7 @@
 namespace Pignus\Model;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User repository interface.
@@ -23,7 +24,7 @@ interface UserRepositoryInterface extends ObjectRepository
      *
      * @param string $username
      *
-     * @return \Symfony\Component\Security\Core\User\UserInterface|null
+     * @return UserInterface|null
      */
     public function findOneByUsername(string $username);
 }

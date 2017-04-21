@@ -11,6 +11,7 @@
 
 namespace Pignus\Tests\Authenticator;
 
+use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use Pignus\Authenticator\AbstractOAuth2Authenticator;
 use Pignus\Tests\Model\DummyUser;
@@ -23,7 +24,7 @@ class DummyOAuth2Authenticator extends AbstractOAuth2Authenticator
     /**
      * {@inheritdoc}
      */
-    protected function getProvider(RouterInterface $router, string $firewall)
+    protected function getProvider(RouterInterface $router, string $firewall): AbstractProvider
     {
         return $this->provider;
     }

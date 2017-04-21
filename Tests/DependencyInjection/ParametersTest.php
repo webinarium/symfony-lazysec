@@ -14,28 +14,38 @@ namespace Pignus\Tests\DependencyInjection;
 use Pignus\DependencyInjection\PignusExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class LoginParametersTest extends \PHPUnit_Framework_TestCase
+class ParametersTest extends \PHPUnit_Framework_TestCase
 {
-    public function testParameterEmpty()
+    public function testParametersEmpty()
     {
+        $expected = [
+            'pignus.login' => [],
+        ];
+
         $config = [];
 
         $container = new ContainerBuilder();
 
-        self::assertFalse($container->hasParameter('pignus.login'));
+        foreach ($expected as $key => $value) {
+            self::assertFalse($container->hasParameter($key));
+        }
 
         $extension = new PignusExtension();
         $extension->load(['pignus' => $config], $container);
 
-        self::assertTrue($container->hasParameter('pignus.login'));
-        self::assertEquals([], $container->getParameter('pignus.login'));
+        foreach ($expected as $key => $value) {
+            self::assertTrue($container->hasParameter($key));
+            self::assertEquals($expected[$key], $container->getParameter($key));
+        }
     }
 
-    public function testParameterPresent()
+    public function testParametersPresent()
     {
         $expected = [
-            'main'  => 'default_login_page',
-            'admin' => 'admin_login_page',
+            'pignus.login' => [
+                'main'  => 'default_login_page',
+                'admin' => 'admin_login_page',
+            ],
         ];
 
         $config = [
@@ -47,12 +57,16 @@ class LoginParametersTest extends \PHPUnit_Framework_TestCase
 
         $container = new ContainerBuilder();
 
-        self::assertFalse($container->hasParameter('pignus.login'));
+        foreach ($expected as $key => $value) {
+            self::assertFalse($container->hasParameter($key));
+        }
 
         $extension = new PignusExtension();
         $extension->load(['pignus' => $config], $container);
 
-        self::assertTrue($container->hasParameter('pignus.login'));
-        self::assertEquals($expected, $container->getParameter('pignus.login'));
+        foreach ($expected as $key => $value) {
+            self::assertTrue($container->hasParameter($key));
+            self::assertEquals($value, $container->getParameter($key));
+        }
     }
 }

@@ -11,6 +11,7 @@
 
 namespace Pignus\Authenticator;
 
+use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -173,9 +174,9 @@ abstract class AbstractOAuth2Authenticator extends AbstractGuardAuthenticator
      * @param RouterInterface $router
      * @param string          $firewall
      *
-     * @return \League\OAuth2\Client\Provider\AbstractProvider
+     * @return AbstractProvider
      */
-    abstract protected function getProvider(RouterInterface $router, string $firewall);
+    abstract protected function getProvider(RouterInterface $router, string $firewall): AbstractProvider;
 
     /**
      * Returns user entity based on specified OAuth2 account.
