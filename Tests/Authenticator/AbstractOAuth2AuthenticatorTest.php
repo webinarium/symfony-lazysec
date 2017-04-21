@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class AbstractOAuth2AuthenticatorTest extends \PHPUnit_Framework_TestCase
@@ -115,6 +116,30 @@ class AbstractOAuth2AuthenticatorTest extends \PHPUnit_Framework_TestCase
         self::assertInstanceOf(Response::class, $response);
         self::assertEquals(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
         self::assertEquals('Authentication required.', $response->getContent());
+    }
+
+    public function testStartWithException()
+    {
+        $exception = new AuthenticationException('Account is disabled.');
+
+        $session = $this->createMock(SessionInterface::class);
+        $session
+            ->method('get')
+            ->willReturnMap([
+                [Security::AUTHENTICATION_ERROR, null, $exception],
+            ]);
+
+        $reflection = new \ReflectionProperty(DummyOAuth2Authenticator::class, 'session');
+        $reflection->setAccessible(true);
+        $reflection->setValue($this->authenticator, $session);
+
+        $request = new Request();
+
+        $response = $this->authenticator->start($request);
+
+        self::assertInstanceOf(Response::class, $response);
+        self::assertEquals(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
+        self::assertEquals('Account is disabled.', $response->getContent());
     }
 
     public function testGetCredentialsSuccess()
@@ -241,9 +266,7 @@ class AbstractOAuth2AuthenticatorTest extends \PHPUnit_Framework_TestCase
 
         $response = $this->authenticator->onAuthenticationFailure($request, $exception);
 
-        self::assertInstanceOf(Response::class, $response);
-        self::assertEquals(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
-        self::assertEquals('Authentication required.', $response->getContent());
+        self::assertNull($response);
     }
 
     public function testSupportsRememberMe()

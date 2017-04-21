@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
@@ -59,6 +60,13 @@ abstract class AbstractOAuth2Authenticator extends AbstractGuardAuthenticator
         // Do not redirect the user if it's an AJAX request.
         if ($request->isXmlHttpRequest()) {
             return new Response('Authentication required.', Response::HTTP_UNAUTHORIZED);
+        }
+
+        $exception = $this->session->get(Security::AUTHENTICATION_ERROR);
+        $this->session->remove(Security::AUTHENTICATION_ERROR);
+
+        if ($exception !== null) {
+            return new Response($exception->getMessage(), Response::HTTP_UNAUTHORIZED);
         }
 
         $firewall = $this->firewalls->getFirewallConfig($request)->getName();
@@ -142,6 +150,8 @@ abstract class AbstractOAuth2Authenticator extends AbstractGuardAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+        $this->session->remove(Security::AUTHENTICATION_ERROR);
+
         // An URL the user was trying to reach before authentication.
         $targetPath = sprintf('_security.%s.target_path', $providerKey);
         $targetUrl  = $this->session->get($targetPath, '/');
@@ -157,7 +167,9 @@ abstract class AbstractOAuth2Authenticator extends AbstractGuardAuthenticator
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        return new Response('Authentication required.', Response::HTTP_UNAUTHORIZED);
+        $this->session->set(Security::AUTHENTICATION_ERROR, $exception);
+
+        return null;
     }
 
     /**
