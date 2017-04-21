@@ -15,8 +15,12 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Pignus\EventListener\UserLockout;
 use Pignus\Tests\Model\DummyUserEx;
 use Psr\Log\LoggerInterface;
+use Symfony\Bundle\SecurityBundle\Security\FirewallConfig;
+use Symfony\Bundle\SecurityBundle\Security\FirewallMap;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Core\AuthenticationEvents;
 use Symfony\Component\Security\Core\Event\AuthenticationEvent;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -31,11 +35,17 @@ class UserLockoutTest extends \PHPUnit_Framework_TestCase
     /** @var LoggerInterface */
     protected $logger;
 
+    /** @var RequestStack */
+    protected $request_stack;
+
+    /** @var FirewallMap */
+    protected $firewalls;
+
     /** @var ObjectManager */
     protected $manager;
 
-    /** @var UserProviderInterface */
-    protected $provider;
+    /** @var ContainerInterface */
+    protected $container;
 
     protected function setUp()
     {
@@ -49,34 +59,51 @@ class UserLockoutTest extends \PHPUnit_Framework_TestCase
 
         $this->logger = $this->createMock(LoggerInterface::class);
 
+        $this->request_stack = $this->createMock(RequestStack::class);
+        $this->request_stack
+            ->method('getCurrentRequest')
+            ->willReturn(new Request());
+
+        $this->firewalls = $this->createMock(FirewallMap::class);
+        $this->firewalls
+            ->method('getFirewallConfig')
+            ->willReturn(new FirewallConfig('main', '', null, true, false, 'user_provider'));
+
         $this->manager = $this->createMock(ObjectManager::class);
 
-        $this->provider = $this->createMock(UserProviderInterface::class);
-        $this->provider
+        $provider = $this->createMock(UserProviderInterface::class);
+        $provider
             ->method('loadUserByUsername')
             ->willReturnMap([
                 ['admin', $this->user],
             ]);
-    }
 
-    public function testGetSubscribedEvents()
-    {
-        $expected = [
-            AuthenticationEvents::AUTHENTICATION_SUCCESS => 'onSuccess',
-            AuthenticationEvents::AUTHENTICATION_FAILURE => 'onFailure',
-        ];
+        $this->container = $this->createMock(ContainerInterface::class);
 
-        self::assertEquals($expected, UserLockout::getSubscribedEvents());
+        $this->container
+            ->method('has')
+            ->willReturnMap([
+                ['user_provider', true],
+            ]);
+
+        $this->container
+            ->method('get')
+            ->willReturnMap([
+                ['user_provider', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $provider],
+            ]);
     }
 
     public function testTemporaryLock()
     {
         $listener = new UserLockout(
             $this->logger,
+            $this->request_stack,
+            $this->firewalls,
             $this->manager,
-            $this->provider,
             2, 30
         );
+
+        $listener->setContainer($this->container);
 
         $token   = new UsernamePasswordToken('admin', 'secret', 'main');
         $failure = new AuthenticationFailureEvent($token, new AuthenticationException());
@@ -94,10 +121,13 @@ class UserLockoutTest extends \PHPUnit_Framework_TestCase
     {
         $listener = new UserLockout(
             $this->logger,
+            $this->request_stack,
+            $this->firewalls,
             $this->manager,
-            $this->provider,
             2, null
         );
+
+        $listener->setContainer($this->container);
 
         $token   = new UsernamePasswordToken('admin', 'secret', 'main');
         $failure = new AuthenticationFailureEvent($token, new AuthenticationException());
@@ -115,10 +145,13 @@ class UserLockoutTest extends \PHPUnit_Framework_TestCase
     {
         $listener = new UserLockout(
             $this->logger,
+            $this->request_stack,
+            $this->firewalls,
             $this->manager,
-            $this->provider,
             null, null
         );
+
+        $listener->setContainer($this->container);
 
         $token   = new UsernamePasswordToken('admin', 'secret', 'main');
         $failure = new AuthenticationFailureEvent($token, new AuthenticationException());
@@ -141,13 +174,30 @@ class UserLockoutTest extends \PHPUnit_Framework_TestCase
             ->with('unknown')
             ->willThrowException(new UsernameNotFoundException());
 
+        $container = $this->createMock(ContainerInterface::class);
+
+        $container
+            ->method('has')
+            ->willReturnMap([
+                ['user_provider', true],
+            ]);
+
+        $container
+            ->method('get')
+            ->willReturnMap([
+                ['user_provider', ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE, $provider],
+            ]);
+
         /** @var UserProviderInterface $provider */
         $listener = new UserLockout(
             $this->logger,
+            $this->request_stack,
+            $this->firewalls,
             $this->manager,
-            $provider,
             2, 30
         );
+
+        $listener->setContainer($container);
 
         $token   = new UsernamePasswordToken('unknown', 'secret', 'main');
         $failure = new AuthenticationFailureEvent($token, new AuthenticationException());
@@ -166,10 +216,13 @@ class UserLockoutTest extends \PHPUnit_Framework_TestCase
     {
         $listener = new UserLockout(
             $this->logger,
+            $this->request_stack,
+            $this->firewalls,
             $this->manager,
-            $this->provider,
             2, 30
         );
+
+        $listener->setContainer($this->container);
 
         $token   = new UsernamePasswordToken($this->user, 'secret', 'main');
         $success = new AuthenticationEvent($token);
@@ -179,6 +232,28 @@ class UserLockoutTest extends \PHPUnit_Framework_TestCase
 
         $listener->onSuccess($success);
         self::assertTrue($this->user->isAccountNonLocked());
+    }
+
+    public function testNoUnlock()
+    {
+        $listener = new UserLockout(
+            $this->logger,
+            $this->request_stack,
+            $this->firewalls,
+            $this->manager,
+            null, null
+        );
+
+        $listener->setContainer($this->container);
+
+        $token   = new UsernamePasswordToken($this->user, 'secret', 'main');
+        $success = new AuthenticationEvent($token);
+
+        $this->user->lockAccount();
+        self::assertFalse($this->user->isAccountNonLocked());
+
+        $listener->onSuccess($success);
+        self::assertFalse($this->user->isAccountNonLocked());
     }
 
     protected function getAuthFailures(DummyUserEx $user)

@@ -19,7 +19,9 @@ class ParametersTest extends \PHPUnit_Framework_TestCase
     public function testParametersEmpty()
     {
         $expected = [
-            'pignus.login' => [],
+            'pignus.auth_failures' => null,
+            'pignus.lock_duration' => null,
+            'pignus.login'         => [],
         ];
 
         $config = [];
@@ -42,14 +44,18 @@ class ParametersTest extends \PHPUnit_Framework_TestCase
     public function testParametersPresent()
     {
         $expected = [
-            'pignus.login' => [
+            'pignus.auth_failures' => 3,
+            'pignus.lock_duration' => 10,
+            'pignus.login'         => [
                 'main'  => 'default_login_page',
                 'admin' => 'admin_login_page',
             ],
         ];
 
         $config = [
-            'login' => [
+            'auth_failures' => 3,
+            'lock_duration' => 10,
+            'login'         => [
                 'main'  => 'default_login_page',
                 'admin' => 'admin_login_page',
             ],
