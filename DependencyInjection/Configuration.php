@@ -31,12 +31,6 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->integerNode('auth_failures')
-                    ->defaultNull()
-                ->end()
-                ->integerNode('lock_duration')
-                    ->defaultNull()
-                ->end()
                 ->booleanNode('unauthorized_request')
                     ->defaultFalse()
                 ->end()

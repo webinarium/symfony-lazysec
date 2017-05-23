@@ -35,9 +35,6 @@ class PignusExtension extends ConfigurableExtension
             $loader->load('unauthorized_request.yml');
         }
 
-        $container->setParameter('pignus.auth_failures', $mergedConfig['auth_failures']);
-        $container->setParameter('pignus.lock_duration', $mergedConfig['lock_duration']);
-
         $container->setParameter('pignus.login', $mergedConfig['login'] ?? []);
     }
 }

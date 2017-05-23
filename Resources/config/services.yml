@@ -19,21 +19,6 @@ services:
             - '@session'
             - '@security.firewall.map'
 
-    pignus.event_listener.user_lockout:
-        class: Pignus\EventListener\UserLockout
-        tags:
-            - { name: kernel.event_listener, event: security.authentication.success, method: onSuccess }
-            - { name: kernel.event_listener, event: security.authentication.failure, method: onFailure }
-        arguments:
-            - '@logger'
-            - '@request_stack'
-            - '@security.firewall.map'
-            - '@doctrine.orm.default_entity_manager'
-            - '%pignus.auth_failures%'
-            - '%pignus.lock_duration%'
-        calls:
-            - [ setContainer, [ '@service_container' ] ]
-
     pignus.provider.abstract:
         abstract: true
         class: Pignus\Provider\GenericUserProvider
