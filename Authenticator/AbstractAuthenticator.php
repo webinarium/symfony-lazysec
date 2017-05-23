@@ -113,7 +113,7 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
      */
     public function checkCredentials($credentials, UserInterface $user)
     {
-        $encoder = $this->encoders->getEncoder(get_class($user));
+        $encoder = $this->encoders->getEncoder($user);
 
         if (!$encoder->isPasswordValid($user->getPassword(), $credentials['password'], $user->getSalt())) {
             throw new AuthenticationException('Bad credentials.');
