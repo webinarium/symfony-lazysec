@@ -13,28 +13,22 @@ namespace Pignus\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 /**
  * Loads and manages the bundle configuration.
  *
  * @see http://symfony.com/doc/current/cookbook/bundles/extension.html
  */
-class PignusExtension extends ConfigurableExtension
+class PignusExtension extends Extension
 {
     /**
      * {@inheritdoc}
      */
-    protected function loadInternal(array $mergedConfig, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
-
-        if ($mergedConfig['unauthorized_request']) {
-            $loader->load('unauthorized_request.yml');
-        }
-
-        $container->setParameter('pignus.login', $mergedConfig['login'] ?? []);
     }
 }
