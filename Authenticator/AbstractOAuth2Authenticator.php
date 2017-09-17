@@ -58,7 +58,7 @@ abstract class AbstractOAuth2Authenticator extends AbstractGuardAuthenticator
     public function start(Request $request, AuthenticationException $authException = null)
     {
         // Do not redirect the user if it's an AJAX request.
-        if ($request->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest() || $request->getContentType() === 'json') {
             return new Response('Authentication required.', Response::HTTP_UNAUTHORIZED);
         }
 
@@ -157,7 +157,7 @@ abstract class AbstractOAuth2Authenticator extends AbstractGuardAuthenticator
         $targetUrl  = $this->session->get($targetPath, '/');
 
         // Do not redirect the user if it's an AJAX request.
-        return $request->isXmlHttpRequest()
+        return $request->isXmlHttpRequest() || $request->getContentType() === 'json'
             ? null
             : new RedirectResponse($targetUrl);
     }

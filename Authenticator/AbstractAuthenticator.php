@@ -63,7 +63,7 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
     public function start(Request $request, AuthenticationException $authException = null)
     {
         // Do not redirect the user if it's an AJAX request.
-        if ($request->isXmlHttpRequest()) {
+        if ($request->isXmlHttpRequest() || $request->getContentType() === 'json') {
 
             $exception = $this->session->get(Security::AUTHENTICATION_ERROR);
             $this->session->remove(Security::AUTHENTICATION_ERROR);
@@ -134,7 +134,7 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
         $targetUrl  = $this->session->get($targetPath, $this->getDefaultUrl($this->router, $providerKey));
 
         // Do not redirect the user if it's an AJAX request.
-        return $request->isXmlHttpRequest()
+        return $request->isXmlHttpRequest() || $request->getContentType() === 'json'
             ? new JsonResponse()
             : new RedirectResponse($targetUrl);
     }
