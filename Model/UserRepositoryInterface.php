@@ -24,7 +24,7 @@ interface UserRepositoryInterface extends ObjectRepository
      *
      * @param string $username
      *
-     * @return UserInterface|null
+     * @return null|UserInterface
      */
     public function findOneByUsername(string $username);
 }

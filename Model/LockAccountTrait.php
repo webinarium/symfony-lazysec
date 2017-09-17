@@ -36,7 +36,7 @@ trait LockAccountTrait
     /**
      * Increases number of authentication failures.
      *
-     * @return int|null New authentication failures number.
+     * @return null|int New authentication failures number.
      */
     public function incAuthFailures()
     {

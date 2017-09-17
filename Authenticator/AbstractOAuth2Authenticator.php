@@ -45,7 +45,8 @@ abstract class AbstractOAuth2Authenticator extends AbstractGuardAuthenticator
     public function __construct(
         RouterInterface  $router,
         SessionInterface $session,
-        FirewallMap      $firewalls)
+        FirewallMap      $firewalls
+    )
     {
         $this->router    = $router;
         $this->session   = $session;
@@ -195,7 +196,7 @@ abstract class AbstractOAuth2Authenticator extends AbstractGuardAuthenticator
      *
      * @param ResourceOwnerInterface $owner
      *
-     * @return UserInterface|null
+     * @return null|UserInterface
      */
     abstract protected function getUserFromResourceOwner(ResourceOwnerInterface $owner);
 }

@@ -49,7 +49,8 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
         RouterInterface         $router,
         SessionInterface        $session,
         EncoderFactoryInterface $encoders,
-        FirewallMap             $firewalls)
+        FirewallMap             $firewalls
+    )
     {
         $this->router    = $router;
         $this->session   = $session;
