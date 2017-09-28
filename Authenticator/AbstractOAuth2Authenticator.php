@@ -25,6 +25,7 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Authenticates user against OAuth2 server.
@@ -33,24 +34,28 @@ abstract class AbstractOAuth2Authenticator extends AbstractGuardAuthenticator
 {
     protected $router;
     protected $session;
+    protected $translator;
     protected $firewalls;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param RouterInterface  $router
-     * @param SessionInterface $session
-     * @param FirewallMap      $firewalls
+     * @param RouterInterface     $router
+     * @param SessionInterface    $session
+     * @param TranslatorInterface $translator
+     * @param FirewallMap         $firewalls
      */
     public function __construct(
-        RouterInterface  $router,
-        SessionInterface $session,
-        FirewallMap      $firewalls
+        RouterInterface     $router,
+        SessionInterface    $session,
+        TranslatorInterface $translator,
+        FirewallMap         $firewalls
     )
     {
-        $this->router    = $router;
-        $this->session   = $session;
-        $this->firewalls = $firewalls;
+        $this->router     = $router;
+        $this->session    = $session;
+        $this->translator = $translator;
+        $this->firewalls  = $firewalls;
     }
 
     /**
@@ -60,7 +65,7 @@ abstract class AbstractOAuth2Authenticator extends AbstractGuardAuthenticator
     {
         // Do not redirect the user if it's an AJAX request.
         if ($request->isXmlHttpRequest() || $request->getContentType() === 'json') {
-            return new Response('Authentication required.', Response::HTTP_UNAUTHORIZED);
+            return new Response($this->translator->trans('Authentication required.'), Response::HTTP_UNAUTHORIZED);
         }
 
         $exception = $this->session->get(Security::AUTHENTICATION_ERROR);
@@ -94,7 +99,7 @@ abstract class AbstractOAuth2Authenticator extends AbstractGuardAuthenticator
         }
 
         if (!$code || !$state) {
-            throw new AuthenticationException('Bad credentials.');
+            throw new AuthenticationException($this->translator->trans('Bad credentials.'));
         }
 
         $firewall = $this->firewalls->getFirewallConfig($request)->getName();
@@ -128,7 +133,7 @@ abstract class AbstractOAuth2Authenticator extends AbstractGuardAuthenticator
             $user  = $this->getUserFromResourceOwner($owner);
 
             if ($user === null) {
-                throw new AuthenticationException('Bad credentials.');
+                throw new AuthenticationException($this->translator->trans('Bad credentials.'));
             }
 
             return $user;

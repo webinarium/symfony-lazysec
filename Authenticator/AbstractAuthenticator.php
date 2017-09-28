@@ -26,6 +26,7 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Authenticates user against the database.
@@ -34,6 +35,7 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
 {
     protected $router;
     protected $session;
+    protected $translator;
     protected $encoders;
     protected $firewalls;
 
@@ -42,20 +44,23 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
      *
      * @param RouterInterface         $router
      * @param SessionInterface        $session
+     * @param TranslatorInterface     $translator
      * @param EncoderFactoryInterface $encoders
      * @param FirewallMap             $firewalls
      */
     public function __construct(
         RouterInterface         $router,
         SessionInterface        $session,
+        TranslatorInterface     $translator,
         EncoderFactoryInterface $encoders,
         FirewallMap             $firewalls
     )
     {
-        $this->router    = $router;
-        $this->session   = $session;
-        $this->encoders  = $encoders;
-        $this->firewalls = $firewalls;
+        $this->router     = $router;
+        $this->session    = $session;
+        $this->translator = $translator;
+        $this->encoders   = $encoders;
+        $this->firewalls  = $firewalls;
     }
 
     /**
@@ -70,7 +75,7 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
             $this->session->remove(Security::AUTHENTICATION_ERROR);
 
             $message = $exception === null
-                ? 'Authentication required.'
+                ? $this->translator->trans('Authentication required.')
                 : $exception->getMessage();
 
             return new Response($message, Response::HTTP_UNAUTHORIZED);
@@ -105,7 +110,7 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
             return $userProvider->loadUserByUsername($credentials['username']);
         }
         catch (UsernameNotFoundException $e) {
-            throw new AuthenticationException('Bad credentials.');
+            throw new AuthenticationException($this->translator->trans('Bad credentials.'));
         }
     }
 
@@ -117,7 +122,7 @@ abstract class AbstractAuthenticator extends AbstractGuardAuthenticator
         $encoder = $this->encoders->getEncoder($user);
 
         if (!$encoder->isPasswordValid($user->getPassword(), $credentials['password'], $user->getSalt())) {
-            throw new AuthenticationException('Bad credentials.');
+            throw new AuthenticationException($this->translator->trans('Bad credentials.'));
         }
 
         return true;

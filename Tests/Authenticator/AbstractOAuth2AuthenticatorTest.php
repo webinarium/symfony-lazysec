@@ -26,6 +26,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class AbstractOAuth2AuthenticatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -48,6 +49,14 @@ class AbstractOAuth2AuthenticatorTest extends \PHPUnit_Framework_TestCase
             ->willReturnMap([
                 ['main@Pignus\\Tests\\Authenticator\\DummyOAuth2Authenticator', null, 'goodState'],
                 ['_security.main.target_path', '/', 'http://localhost/profile'],
+            ]);
+
+        $translator = $this->createMock(TranslatorInterface::class);
+        $translator
+            ->method('trans')
+            ->willReturnMap([
+                ['Authentication required.', [], null, null, 'You are not authenticated.'],
+                ['Bad credentials.', [], null, null, 'Unknown user or wrong password.'],
             ]);
 
         $firewallMap = $this->createMock(FirewallMap::class);
@@ -82,11 +91,13 @@ class AbstractOAuth2AuthenticatorTest extends \PHPUnit_Framework_TestCase
             ]);
 
         /** @var RouterInterface $router */
+        /** @var TranslatorInterface $translator */
         /** @var SessionInterface $session */
         /** @var FirewallMap $firewallMap */
         $this->authenticator = new DummyOAuth2Authenticator(
             $router,
             $session,
+            $translator,
             $firewallMap
         );
 
@@ -115,7 +126,7 @@ class AbstractOAuth2AuthenticatorTest extends \PHPUnit_Framework_TestCase
 
         self::assertInstanceOf(Response::class, $response);
         self::assertEquals(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
-        self::assertEquals('Authentication required.', $response->getContent());
+        self::assertEquals('You are not authenticated.', $response->getContent());
     }
 
     public function testStartWithException()
@@ -166,7 +177,7 @@ class AbstractOAuth2AuthenticatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Symfony\Component\Security\Core\Exception\AuthenticationException
-     * @expectedExceptionMessage Bad credentials.
+     * @expectedExceptionMessage Unknown user or wrong password.
      */
     public function testGetCredentialsMissingCode()
     {
@@ -179,7 +190,7 @@ class AbstractOAuth2AuthenticatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Symfony\Component\Security\Core\Exception\AuthenticationException
-     * @expectedExceptionMessage Bad credentials.
+     * @expectedExceptionMessage Unknown user or wrong password.
      */
     public function testGetCredentialsMissingState()
     {
@@ -215,7 +226,7 @@ class AbstractOAuth2AuthenticatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Symfony\Component\Security\Core\Exception\AuthenticationException
-     * @expectedExceptionMessage Bad credentials.
+     * @expectedExceptionMessage Unknown user or wrong password.
      */
     public function testGetUserNotFound()
     {

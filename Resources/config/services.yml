@@ -7,6 +7,7 @@ services:
         arguments:
             - '@router'
             - '@session'
+            - '@translator'
             - '@security.encoder_factory'
             - '@security.firewall.map'
 

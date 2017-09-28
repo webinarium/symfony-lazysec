@@ -29,6 +29,7 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class AbstractAuthenticatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -58,6 +59,14 @@ class AbstractAuthenticatorTest extends \PHPUnit_Framework_TestCase
                 ['_security.main.target_path', '/', 'http://localhost/profile'],
             ]);
 
+        $translator = $this->createMock(TranslatorInterface::class);
+        $translator
+            ->method('trans')
+            ->willReturnMap([
+                ['Authentication required.', [], null, null, 'You are not authenticated.'],
+                ['Bad credentials.', [], null, null, 'Unknown user or wrong password.'],
+            ]);
+
         $encoder = $this->createMock(PasswordEncoderInterface::class);
         $encoder
             ->method('isPasswordValid')
@@ -77,11 +86,13 @@ class AbstractAuthenticatorTest extends \PHPUnit_Framework_TestCase
 
         /** @var RouterInterface $router */
         /** @var SessionInterface $session */
+        /** @var TranslatorInterface $translator */
         /** @var EncoderFactoryInterface $encoders */
         /** @var FirewallMap $firewallMap */
         $this->authenticator = new DummyAuthenticator(
             $router,
             $session,
+            $translator,
             $encoders,
             $firewallMap
         );
@@ -112,7 +123,7 @@ class AbstractAuthenticatorTest extends \PHPUnit_Framework_TestCase
 
         self::assertInstanceOf(Response::class, $response);
         self::assertEquals(Response::HTTP_UNAUTHORIZED, $response->getStatusCode());
-        self::assertEquals('Authentication required.', $response->getContent());
+        self::assertEquals('You are not authenticated.', $response->getContent());
     }
 
     public function testGetCredentialsSuccess()
@@ -156,7 +167,7 @@ class AbstractAuthenticatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Symfony\Component\Security\Core\Exception\AuthenticationException
-     * @expectedExceptionMessage Bad credentials.
+     * @expectedExceptionMessage Unknown user or wrong password.
      */
     public function testGetUserNotFound()
     {
@@ -187,7 +198,7 @@ class AbstractAuthenticatorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException \Symfony\Component\Security\Core\Exception\AuthenticationException
-     * @expectedExceptionMessage Bad credentials.
+     * @expectedExceptionMessage Unknown user or wrong password.
      */
     public function testCheckCredentialsFailure()
     {
