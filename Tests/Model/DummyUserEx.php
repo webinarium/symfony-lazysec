@@ -15,6 +15,7 @@ use Pignus\Model\DisableAccountTrait;
 use Pignus\Model\ExpireAccountTrait;
 use Pignus\Model\ExpirePasswordTrait;
 use Pignus\Model\LockAccountTrait;
+use Pignus\Model\ResetPasswordTrait;
 
 class DummyUserEx extends DummyUser
 {
@@ -22,4 +23,5 @@ class DummyUserEx extends DummyUser
     use ExpireAccountTrait;
     use ExpirePasswordTrait;
     use LockAccountTrait;
+    use ResetPasswordTrait;
 }
