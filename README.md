@@ -3,7 +3,6 @@
 [![Build Status](https://travis-ci.org/webinarium/PignusBundle.svg?branch=master)](https://travis-ci.org/webinarium/PignusBundle)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/webinarium/PignusBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/webinarium/PignusBundle/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/webinarium/PignusBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/webinarium/PignusBundle/?branch=master)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/acb34716-39ea-4b28-b14c-60d24137f9b5/mini.png)](https://insight.sensiolabs.com/projects/acb34716-39ea-4b28-b14c-60d24137f9b5)
 
 # Pignus for Symfony
 
