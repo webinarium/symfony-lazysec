@@ -1,0 +1,7 @@
+# Thai
+'Authentication required.': 'ต้องยืนยันตัวบุคคล'
+'Bad credentials.': 'ชื้ผู้ใช้หรือรหัสผ่านไม่ถูกต้อง'
+'User account has expired.': 'บัญชีของคุณหมดอายุแล้ว'
+'User account is disabled.': 'บัญชีถูกระงับ'
+'User account is locked.': 'บัญชีถูกล็อค'
+'User credentials have expired.': 'รหัสผ่านของคุณหมดอายุแล้ว'

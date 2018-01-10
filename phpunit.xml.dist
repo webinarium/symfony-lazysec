@@ -8,16 +8,16 @@
          bootstrap="vendor/autoload.php"
 >
     <testsuites>
-        <testsuite name="PignusBundle Test Suite">
-            <directory>./Tests</directory>
+        <testsuite name="LazySec Test Suite">
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>.</directory>
+            <directory>./src</directory>
             <exclude>
-                <directory>./Tests</directory>
+                <directory>./tests</directory>
                 <directory>./vendor</directory>
             </exclude>
         </whitelist>

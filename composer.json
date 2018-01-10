@@ -1,35 +1,30 @@
 {
-    "name": "webinarium/pignus-bundle",
-    "description": "Symfony bundle with a bunch of security related features",
-    "type": "symfony-bundle",
+    "name": "webinarium/symfony-lazysec",
+    "description": "Symfony library with a bunch of security related features",
+    "type": "library",
     "keywords": ["symfony", "security"],
-    "homepage": "https://github.com/webinarium/PignusBundle",
+    "homepage": "https://github.com/webinarium/symfony-lazysec",
     "license": "MIT",
     "require": {
-        "php"                          : ">=7.0",
-        "symfony/config"               : "^2.8|^3.0",
-        "symfony/dependency-injection" : "^2.8|^3.0",
-        "symfony/event-dispatcher"     : "^2.8|^3.0",
-        "symfony/framework-bundle"     : "^2.8|^3.0",
-        "symfony/http-foundation"      : "^2.8|^3.0",
-        "symfony/http-kernel"          : "^2.8|^3.0",
-        "symfony/routing"              : "^2.8|^3.0",
-        "symfony/security"             : "^2.8|^3.0",
-        "symfony/security-bundle"      : "^2.8|^3.0",
-        "symfony/translation"          : "^2.8|^3.0",
-        "doctrine/common"              : "^2.7",
-        "doctrine/orm"                 : "^2.5",
-        "league/oauth2-client"         : "^2.2",
-        "ramsey/uuid"                  : "^3.7",
-        "roave/security-advisories"    : "dev-master"
+        "php"                       : ">=7.1",
+        "symfony/security-core"     : "^2.7|^3.0|^4.0",
+        "doctrine/common"           : "^2.7",
+        "doctrine/orm"              : "^2.5",
+        "ramsey/uuid"               : "^3.7",
+        "roave/security-advisories" : "dev-master"
     },
     "require-dev": {
-        "phpunit/phpunit"              : "^5.4",
-        "friendsofphp/php-cs-fixer"    : "^2.7"
+        "phpunit/phpunit"           : "^5.7",
+        "friendsofphp/php-cs-fixer" : "^2.9"
     },
     "autoload": {
         "psr-4": {
-            "Pignus\\": ""
+            "LazySec\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LazySec\\Tests\\": "tests/"
         }
     }
 }
