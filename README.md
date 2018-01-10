@@ -1,4 +1,4 @@
-[![PHP](https://img.shields.io/badge/PHP-7.0%2B-blue.svg)](https://secure.php.net/migration70)
+[![PHP](https://img.shields.io/badge/PHP-7.1%2B-blue.svg)](https://secure.php.net/migration71)
 [![Latest Stable Version](https://poser.pugx.org/webinarium/symfony-lazysec/v/stable)](https://packagist.org/packages/webinarium/symfony-lazysec)
 [![Build Status](https://travis-ci.org/webinarium/symfony-lazysec.svg?branch=master)](https://travis-ci.org/webinarium/symfony-lazysec)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/webinarium/symfony-lazysec/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/webinarium/symfony-lazysec/?branch=master)
