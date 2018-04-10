@@ -1,10 +1,13 @@
-checks:
-    php: true
+build:
+    tests:
+        override:
+            - php-scrutinizer-run
 
 tools:
     external_code_coverage: true
 
 filter:
     excluded_paths:
-        - 'tests/*'
-        - 'vendor/*'
+        - 'tests/'
+    dependency_paths:
+        - 'vendor/'
