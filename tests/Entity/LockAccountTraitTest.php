@@ -23,9 +23,9 @@ class LockAccountTraitTest extends TestCase
         $reflection->setAccessible(true);
         self::assertNull($reflection->getValue($user));
 
-        self::assertEquals(1, $user->incAuthFailures());
-        self::assertEquals(2, $user->incAuthFailures());
-        self::assertEquals(3, $user->incAuthFailures());
+        self::assertSame(1, $user->incAuthFailures());
+        self::assertSame(2, $user->incAuthFailures());
+        self::assertSame(3, $user->incAuthFailures());
     }
 
     public function testLockUnlockAccount()

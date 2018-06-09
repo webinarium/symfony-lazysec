@@ -57,7 +57,7 @@ class GenericUserProviderTest extends TestCase
         $result = $this->provider->loadUserByUsername('admin');
 
         self::assertInstanceOf(DummyUser::class, $result);
-        self::assertEquals('admin', $result->getUsername());
+        self::assertSame('admin', $result->getUsername());
     }
 
     public function testLoadUnknownUserByUsername()
@@ -72,7 +72,7 @@ class GenericUserProviderTest extends TestCase
         $result = $this->provider->refreshUser($this->user);
 
         self::assertInstanceOf(DummyUser::class, $result);
-        self::assertEquals('admin', $result->getUsername());
+        self::assertSame('admin', $result->getUsername());
     }
 
     public function testRefreshUnknownUser()
