@@ -9,6 +9,7 @@
 The library provides few classes and features related to the Security component:
 
 - [User entity trait](//github.com/webinarium/symfony-lazysec/wiki/User-entity)
+- [User checker](//github.com/webinarium/symfony-lazysec/wiki/User-checker)
 - [User provider](//github.com/webinarium/symfony-lazysec/wiki/User-provider)
 - [Translations](//github.com/webinarium/symfony-lazysec/wiki/Translations)
 
