@@ -17,9 +17,9 @@ class LockAccountTraitTest extends TestCase
 {
     public function testIncAuthFailures()
     {
-        $user = new DummyUserEx();
+        $user = new DummyUser();
 
-        $reflection = new \ReflectionProperty(DummyUserEx::class, 'authFailures');
+        $reflection = new \ReflectionProperty(DummyUser::class, 'authFailures');
         $reflection->setAccessible(true);
         self::assertNull($reflection->getValue($user));
 
@@ -32,7 +32,7 @@ class LockAccountTraitTest extends TestCase
     {
         $now = new \DateTime();
 
-        $user = new DummyUserEx();
+        $user = new DummyUser();
         self::assertTrue($user->isAccountNonLocked());
 
         $user->lockAccount($now->add(new \DateInterval('PT1M')));

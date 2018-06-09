@@ -2,7 +2,7 @@
 
 //----------------------------------------------------------------------
 //
-//  Copyright (C) 2017 Artem Rodygin
+//  Copyright (C) 2017-2018 Artem Rodygin
 //
 //  You should have received a copy of the MIT License along with
 //  this file. If not, see <http://opensource.org/licenses/MIT>.
@@ -24,6 +24,20 @@ trait ExpireAccountTrait
      * @ORM\Column(name="account_expires_at", type="integer", nullable=true)
      */
     protected $accountExpiresAt;
+
+    /**
+     * Checks whether the user's account has expired.
+     *
+     * Inherited from '\Symfony\Component\Security\Core\User\AdvancedUserInterface'.
+     *
+     * @return bool TRUE if the user's account is non expired, FALSE otherwise.
+     */
+    public function isAccountNonExpired(): bool
+    {
+        return $this->canAccountBeExpired()
+            ? $this->accountExpiresAt === null || $this->accountExpiresAt > time()
+            : true;
+    }
 
     /**
      * Makes account to expire at specified moment of time (NULL for no expiration).

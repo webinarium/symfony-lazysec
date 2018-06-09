@@ -2,7 +2,7 @@
 
 //----------------------------------------------------------------------
 //
-//  Copyright (C) 2017 Artem Rodygin
+//  Copyright (C) 2017-2018 Artem Rodygin
 //
 //  You should have received a copy of the MIT License along with
 //  this file. If not, see <http://opensource.org/licenses/MIT>.
@@ -24,6 +24,20 @@ trait ExpirePasswordTrait
      * @ORM\Column(name="password_expires_at", type="integer", nullable=true)
      */
     protected $passwordExpiresAt;
+
+    /**
+     * Checks whether the user's credentials (password) has expired.
+     *
+     * Inherited from '\Symfony\Component\Security\Core\User\AdvancedUserInterface'.
+     *
+     * @return bool TRUE if the user's credentials are non expired, FALSE otherwise.
+     */
+    public function isCredentialsNonExpired(): bool
+    {
+        return $this->canPasswordBeExpired()
+            ? $this->passwordExpiresAt === null || $this->passwordExpiresAt > time()
+            : true;
+    }
 
     /**
      * Makes password to expire at specified moment of time (NULL for no expiration).

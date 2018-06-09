@@ -2,7 +2,7 @@
 
 //----------------------------------------------------------------------
 //
-//  Copyright (C) 2017 Artem Rodygin
+//  Copyright (C) 2017-2018 Artem Rodygin
 //
 //  You should have received a copy of the MIT License along with
 //  this file. If not, see <http://opensource.org/licenses/MIT>.
@@ -24,6 +24,18 @@ trait DisableAccountTrait
      * @ORM\Column(name="enabled", type="boolean", nullable=false)
      */
     protected $isEnabled = true;
+
+    /**
+     * Checks whether the user is enabled.
+     *
+     * Inherited from '\Symfony\Component\Security\Core\User\AdvancedUserInterface'.
+     *
+     * @return bool TRUE if the user is enabled, FALSE otherwise.
+     */
+    public function isEnabled(): bool
+    {
+        return $this->canAccountBeDisabled() ? $this->isEnabled : true;
+    }
 
     /**
      * Disables or enables the account.

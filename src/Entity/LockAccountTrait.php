@@ -2,7 +2,7 @@
 
 //----------------------------------------------------------------------
 //
-//  Copyright (C) 2017 Artem Rodygin
+//  Copyright (C) 2017-2018 Artem Rodygin
 //
 //  You should have received a copy of the MIT License along with
 //  this file. If not, see <http://opensource.org/licenses/MIT>.
@@ -32,6 +32,20 @@ trait LockAccountTrait
      * @ORM\Column(name="locked_until", type="integer", nullable=true)
      */
     protected $lockedUntil;
+
+    /**
+     * Checks whether the user is locked.
+     *
+     * Inherited from '\Symfony\Component\Security\Core\User\AdvancedUserInterface'.
+     *
+     * @return bool TRUE if the user is not locked, FALSE otherwise.
+     */
+    public function isAccountNonLocked(): bool
+    {
+        return $this->canAccountBeLocked()
+            ? $this->lockedUntil === null || $this->lockedUntil !== 0 && $this->lockedUntil <= time()
+            : true;
+    }
 
     /**
      * Increases number of authentication failures.

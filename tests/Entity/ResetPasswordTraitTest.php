@@ -18,7 +18,7 @@ class ResetPasswordTraitTest extends TestCase
 {
     public function testResetToken()
     {
-        $user = new DummyUserEx();
+        $user = new DummyUser();
 
         $token = $user->generateResetToken(new \DateInterval('PT1M'));
         self::assertRegExp('/^([0-9a-f]{32}$)/', $token);

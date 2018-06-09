@@ -17,7 +17,7 @@ class DisableAccountTraitTest extends TestCase
 {
     public function testSetEnabled()
     {
-        $user = new DummyUserEx();
+        $user = new DummyUser();
         self::assertTrue($user->isEnabled());
 
         $user->setEnabled(false);

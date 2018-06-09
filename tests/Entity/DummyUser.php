@@ -11,12 +11,22 @@
 
 namespace LazySec\Tests\Entity;
 
+use LazySec\Entity\DisableAccountTrait;
+use LazySec\Entity\ExpireAccountTrait;
+use LazySec\Entity\ExpirePasswordTrait;
+use LazySec\Entity\LockAccountTrait;
+use LazySec\Entity\ResetPasswordTrait;
 use LazySec\Entity\UserTrait;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class DummyUser implements UserInterface
 {
     use UserTrait;
+    use DisableAccountTrait;
+    use ExpireAccountTrait;
+    use ExpirePasswordTrait;
+    use LockAccountTrait;
+    use ResetPasswordTrait;
 
     protected $username;
 

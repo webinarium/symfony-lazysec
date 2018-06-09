@@ -19,7 +19,7 @@ class ExpirePasswordTraitTest extends TestCase
     {
         $now = new \DateTime();
 
-        $user = new DummyUserEx();
+        $user = new DummyUser();
         self::assertTrue($user->isCredentialsNonExpired());
 
         $user->expirePasswordAt($now->sub(new \DateInterval('PT1M')));
@@ -34,7 +34,7 @@ class ExpirePasswordTraitTest extends TestCase
 
     public function testExpirePasswordIn()
     {
-        $user = new DummyUserEx();
+        $user = new DummyUser();
         self::assertTrue($user->isCredentialsNonExpired());
 
         $user->expirePasswordIn(new \DateInterval('PT0M'));

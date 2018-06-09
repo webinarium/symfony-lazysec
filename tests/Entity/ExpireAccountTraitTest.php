@@ -19,7 +19,7 @@ class ExpireAccountTraitTest extends TestCase
     {
         $now = new \DateTime();
 
-        $user = new DummyUserEx();
+        $user = new DummyUser();
         self::assertTrue($user->isAccountNonExpired());
 
         $user->expireAccountAt($now->sub(new \DateInterval('PT1M')));
@@ -34,7 +34,7 @@ class ExpireAccountTraitTest extends TestCase
 
     public function testExpireAccountIn()
     {
-        $user = new DummyUserEx();
+        $user = new DummyUser();
         self::assertTrue($user->isAccountNonExpired());
 
         $user->expireAccountIn(new \DateInterval('PT0M'));

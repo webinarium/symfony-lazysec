@@ -33,28 +33,4 @@ class UserTraitTest extends TestCase
         $user->eraseCredentials();
         self::assertTrue(true);
     }
-
-    public function testIsEnabled()
-    {
-        $user = new DummyUser();
-        self::assertTrue($user->isEnabled());
-    }
-
-    public function testIsAccountNonExpired()
-    {
-        $user = new DummyUser();
-        self::assertTrue($user->isAccountNonExpired());
-    }
-
-    public function testIsCredentialsNonExpired()
-    {
-        $user = new DummyUser();
-        self::assertTrue($user->isCredentialsNonExpired());
-    }
-
-    public function testIsAccountNonLocked()
-    {
-        $user = new DummyUser();
-        self::assertTrue($user->isAccountNonLocked());
-    }
 }
