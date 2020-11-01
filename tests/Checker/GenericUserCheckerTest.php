@@ -38,6 +38,7 @@ class GenericUserCheckerTest extends TestCase
     public function testPreAuthSuccess()
     {
         $this->checker->checkPreAuth($this->user);
+        self::assertTrue(true);
     }
 
     public function testPreAuthLockedException()
@@ -70,6 +71,7 @@ class GenericUserCheckerTest extends TestCase
     public function testPostAuthSuccess()
     {
         $this->checker->checkPostAuth($this->user);
+        self::assertTrue(true);
     }
 
     public function testPostAuthCredentialsExpiredException()

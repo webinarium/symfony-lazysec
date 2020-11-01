@@ -44,7 +44,7 @@ trait ResetPasswordTrait
     {
         $now = new \DateTime();
 
-        $this->resetToken          = Uuid::uuid4()->getHex();
+        $this->resetToken          = str_replace('-', null, Uuid::uuid4()->toString());
         $this->resetTokenExpiresAt = $now->add($interval)->getTimestamp();
 
         return $this->resetToken;
