@@ -2,7 +2,7 @@
 
 //----------------------------------------------------------------------
 //
-//  Copyright (C) 2018 Artem Rodygin
+//  Copyright (C) 2018-2020 Artem Rodygin
 //
 //  You should have received a copy of the MIT License along with
 //  this file. If not, see <http://opensource.org/licenses/MIT>.
@@ -33,7 +33,7 @@ class GenericUserChecker implements UserCheckerInterface
     public function checkPreAuth(UserInterface $user)
     {
         if (in_array(LockAccountTrait::class, class_uses($user), true)) {
-            /** @var LockAccountTrait $user */
+            /** @var LockAccountTrait|UserInterface $user */
             if (!$user->isAccountNonLocked()) {
                 $exception = new LockedException('User account is locked.');
                 $exception->setUser($user);
@@ -42,7 +42,7 @@ class GenericUserChecker implements UserCheckerInterface
         }
 
         if (in_array(DisableAccountTrait::class, class_uses($user), true)) {
-            /** @var DisableAccountTrait $user */
+            /** @var DisableAccountTrait|UserInterface $user */
             if (!$user->isEnabled()) {
                 $exception = new DisabledException('User account is disabled.');
                 $exception->setUser($user);
@@ -51,7 +51,7 @@ class GenericUserChecker implements UserCheckerInterface
         }
 
         if (in_array(ExpireAccountTrait::class, class_uses($user), true)) {
-            /** @var ExpireAccountTrait $user */
+            /** @var ExpireAccountTrait|UserInterface $user */
             if (!$user->isAccountNonExpired()) {
                 $exception = new AccountExpiredException('User account has expired.');
                 $exception->setUser($user);
@@ -66,7 +66,7 @@ class GenericUserChecker implements UserCheckerInterface
     public function checkPostAuth(UserInterface $user)
     {
         if (in_array(ExpirePasswordTrait::class, class_uses($user), true)) {
-            /** @var ExpirePasswordTrait $user */
+            /** @var ExpirePasswordTrait|UserInterface $user */
             if (!$user->isCredentialsNonExpired()) {
                 $exception = new CredentialsExpiredException('User credentials have expired.');
                 $exception->setUser($user);
