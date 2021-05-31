@@ -7,7 +7,7 @@
     "license": "MIT",
     "require": {
         "php"                       : ">=7.1",
-        "symfony/security-core"     : "^3.4|^4.4|^5.0",
+        "symfony/security-core"     : "^3.4.48|^4.4.23|^5.2.8",
         "doctrine/orm"              : "^2.5",
         "ramsey/uuid"               : "^3.7|^4.0"
     },
